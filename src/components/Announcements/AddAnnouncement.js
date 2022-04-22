@@ -52,10 +52,13 @@ const AddAnnoncement = (props) => {
           value={enteredDescription}
           onChange={enteredDescriptionHandler}
         />
-        <Button className="mt-2" type="submit">
-          {isAnnouncementEdit ? 'Edit Announcement' : 'Add Announcement'}
-        </Button>
-        <Button className="mt-2">Cancel</Button>
+
+        <div className="mt-4 flex gap-4">
+          <Button type="submit">{isAnnouncementEdit ? 'Edit Announcement' : 'Add Announcement'}</Button>
+          <Button type="button" onClick={props.onCancel}>
+            Cancel
+          </Button>
+        </div>
       </form>
     </Card>
   );

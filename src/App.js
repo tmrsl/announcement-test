@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import AddAnnoncement from './components/Announcements/AddAnnouncement';
 import AnnouncementList from './components/Announcements/AnnouncementsList';
+import AnnouncementsEmpty from './components/Announcements/AnnouncementsEmpty';
+import Button from './components/UI/Button';
 
 const announcements = [
   {
@@ -73,21 +75,33 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen p-24 bg-slate-100">
-      <button onClick={() => setIsFormVisible(true)}>Add</button>
-      {isFormVisible && (
-        <AddAnnoncement
-          onAddAnnouncment={addAnnouncmentHandler}
-          onUpdateAnnouncment={updateAnnouncmentHandler}
-          onCancel={hideAndClearForm}
-          announcementToEdit={editAnnouncement}
-        />
-      )}
-      <AnnouncementList
-        announcements={announcementsList}
-        onEditAnnouncement={onEditHandler}
-        onDeleteAnnouncement={deleteAnnouncementHangler}
-      />
+    <div className="min-h-screen flex flex-col bg-slate-100">
+      <header className="flex items-center justify-between py-3 px-6 bg-white shadow-sm">
+        <span>Announcment.io</span>
+
+        <Button onClick={() => setIsFormVisible(true)}>Add new annoncement</Button>
+      </header>
+
+      <div className="p-4">
+        {isFormVisible && (
+          <AddAnnoncement
+            onAddAnnouncment={addAnnouncmentHandler}
+            onUpdateAnnouncment={updateAnnouncmentHandler}
+            onCancel={hideAndClearForm}
+            announcementToEdit={editAnnouncement}
+          />
+        )}
+
+        {announcementsList.length ? (
+          <AnnouncementList
+            announcements={announcementsList}
+            onEditAnnouncement={onEditHandler}
+            onDeleteAnnouncement={deleteAnnouncementHangler}
+          />
+        ) : (
+          !isFormVisible && <AnnouncementsEmpty onStartAdd={() => setIsFormVisible(true)} />
+        )}
+      </div>
     </div>
   );
 }

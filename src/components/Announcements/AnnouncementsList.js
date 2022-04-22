@@ -18,7 +18,6 @@ function AnnouncementList(props) {
     <Card className="p-4 mx-auto my-0 w-4/5 max-w-2xl">
       <Input className="mb-4" placeholder="Search ..." value={search} onChange={(e) => setSearch(e.target.value)} />
 
-      {search}
       <ul className="flex flex-col gap-1 list-none">
         {itemsToDisplay.map((announcement) => (
           <AnnouncementItem
