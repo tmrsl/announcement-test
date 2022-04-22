@@ -1,21 +1,36 @@
-import Card from "../UI/Card";
+import { useState, useMemo } from 'react';
+import Card from '../UI/Card';
+import Input from '../UI/Input';
+import AnnouncementItem from './AnnouncementItem';
 
-const AnnouncementList = (props) => {
+function AnnouncementList(props) {
+  const [search, setSearch] = useState('');
+
+  const itemsToDisplay = useMemo(() => {
+    if (!search) {
+      return props.announcements;
+    }
+
+    return props.announcements.filter((a) => a.title.toLowerCase().includes(search.toLowerCase()));
+  }, [props.announcements, search]);
+
   return (
-    <Card className="mx-auto my-0 w-4/5 max-w-2xl">
-      <ul className="p-4 list-none">
-        {props.announcements.map((announcement) => (
-          <li
-            className="flex-shrink w-full min-w-1 mx-0 my-2 p-2 border-solid border-2 border-gray-200 rounded-md"
-            onClick={() => props.onEditAnnouncement(announcement)}
+    <Card className="p-4 mx-auto my-0 w-4/5 max-w-2xl">
+      <Input className="mb-4" placeholder="Search ..." value={search} onChange={(e) => setSearch(e.target.value)} />
+
+      {search}
+      <ul className="flex flex-col gap-1 list-none">
+        {itemsToDisplay.map((announcement) => (
+          <AnnouncementItem
             key={announcement.id}
-          >
-            {announcement.title}
-          </li>
+            announcement={announcement}
+            onEditAnnouncement={() => props.onEditAnnouncement(announcement)}
+            onDeleteItem={() => props.onDeleteAnnouncement(announcement.id)}
+          />
         ))}
       </ul>
     </Card>
-  )
+  );
 }
 
 export default AnnouncementList;
