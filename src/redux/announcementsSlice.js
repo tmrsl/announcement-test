@@ -1,17 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
+import { AnnouncementPersistService } from '../core/persist.service';
 
 export const tasksSlice = createSlice({
   name: 'announcements',
-  initialState: [
-    {
-      title: 'Full-stack Engineer',
-      description:
-        'We are currently looking for a highly motivated Full-stack Engineer to develop our new product from the ground up.',
-      date: Date.now(),
-      id: uuidv4()
-    }
-  ],
+  initialState: AnnouncementPersistService.preloadSlice(),
   reducers: {
     addAnnouncement: (state, { payload }) => {
       const newAnnouncement = {
