@@ -15,21 +15,33 @@ function AnnouncementList(props) {
     return props.announcements.filter((a) => a.title.toLowerCase().includes(search.toLowerCase()));
   }, [props.announcements, search]);
 
+  const isSearchResults = useMemo(() => {
+    if (search.trim().length < 1) {
+      return true;
+    }
+
+    return search && itemsToDisplay.length;
+  }, [itemsToDisplay, search]);
+
   return (
-    <Card className="p-4 mx-auto my-0 w-4/5 max-w-2xl">
+    <Card className="p-4 mx-auto w-full max-w-2xl">
       <Input className="mb-4" placeholder="Search ..." value={search} onChange={(e) => setSearch(e.target.value)} />
 
-      <ul className="flex flex-col gap-1 list-none">
-        {itemsToDisplay.map((announcement) => (
-          <Link key={announcement.id} to={`/announcements/${announcement.id}`}>
-            <AnnouncementItem
-              announcement={announcement}
-              onEditAnnouncement={() => props.onEditAnnouncement(announcement)}
-              onDeleteItem={() => props.onDeleteAnnouncement(announcement.id)}
-            />
-          </Link>
-        ))}
-      </ul>
+      {isSearchResults ? (
+        <ul className="flex flex-col gap-1 list-none">
+          {itemsToDisplay.map((announcement) => (
+            <Link key={announcement.id} to={`/announcements/${announcement.id}`}>
+              <AnnouncementItem
+                announcement={announcement}
+                onEditAnnouncement={() => props.onEditAnnouncement(announcement)}
+                onDeleteItem={() => props.onDeleteAnnouncement(announcement.id)}
+              />
+            </Link>
+          ))}
+        </ul>
+      ) : (
+        <div>Nothing was found for "{search}"</div>
+      )}
     </Card>
   );
 }

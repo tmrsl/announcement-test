@@ -14,6 +14,7 @@ const AddAnnoncement = (props) => {
       setEnteredTitle(title);
       setEntereddescription(description);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const addAnnouncementHandler = (event) => {
