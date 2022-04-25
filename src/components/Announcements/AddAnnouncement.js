@@ -2,7 +2,7 @@ import Input from '../UI/Input';
 import Button from '../UI/Button';
 import { useEffect, useState, useMemo } from 'react';
 
-const AddAnnoncement = (props) => {
+const AddAnnouncement = (props) => {
   const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredDescription, setEntereddescription] = useState('');
 
@@ -26,7 +26,7 @@ const AddAnnoncement = (props) => {
       const { id } = props.announcementToEdit;
       props.onUpdateAnnouncment({ ...payload, id });
     } else {
-      props.onAddAnnouncment(payload);
+      props.onAddAnnouncement(payload);
     }
 
     setEnteredTitle('');
@@ -68,4 +68,4 @@ const AddAnnoncement = (props) => {
   );
 };
 
-export default AddAnnoncement;
+export default AddAnnouncement;

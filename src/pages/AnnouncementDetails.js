@@ -11,7 +11,7 @@ function hasSimilarWord(currentStr, targetStr) {
   return currectWords.some((w) => targetWords.includes(w));
 }
 
-function buildTopSimilar(announcements, currentAnnoncement, length = 3) {
+function buildTopSimilar(announcements, currentAnnouncement, length = 3) {
   const arr = [];
 
   if (!announcements.length) {
@@ -21,11 +21,11 @@ function buildTopSimilar(announcements, currentAnnoncement, length = 3) {
   for (const announcement of announcements) {
     if (arr.length >= length) break;
 
-    if (announcement.id === currentAnnoncement.id) continue;
+    if (announcement.id === currentAnnouncement.id) continue;
 
     if (
-      hasSimilarWord(currentAnnoncement.title, announcement.title) ||
-      hasSimilarWord(currentAnnoncement.description, announcement.description)
+      hasSimilarWord(currentAnnouncement.title, announcement.title) ||
+      hasSimilarWord(currentAnnouncement.description, announcement.description)
     ) {
       arr.push(announcement);
     }
@@ -38,20 +38,20 @@ export default function AnnouncementDetails(props) {
   const params = useParams();
   const announcementsList = useSelector((state) => state.announcements);
 
-  const currentAnnoncement = announcementsList.find((a) => a.id === params.id);
-  const currentAnnoncementDate = currentAnnoncement ? new Date(currentAnnoncement.date) : null;
+  const currentAnnouncement = announcementsList.find((a) => a.id === params.id);
+  const currentAnnouncementDate = currentAnnouncement ? new Date(currentAnnouncement.date) : null;
 
-  const relativeAnnouncements = currentAnnoncement ? buildTopSimilar(announcementsList, currentAnnoncement) : [];
+  const relativeAnnouncements = currentAnnouncement ? buildTopSimilar(announcementsList, currentAnnouncement) : [];
 
   return (
     <div>
-      {currentAnnoncement ? (
+      {currentAnnouncement ? (
         <div className="flex flex-col gap-8">
           <Card className="flex flex-col p-6">
-            <h2 className="text-2xl mb-4">{currentAnnoncement.title}</h2>
-            <h3 className="text-lg mb-6">{currentAnnoncement.description}</h3>
+            <h2 className="text-2xl mb-4">{currentAnnouncement.title}</h2>
+            <h3 className="text-lg mb-6">{currentAnnouncement.description}</h3>
             <span className="self-end text-sm text-gray-500">
-              {`${currentAnnoncementDate.toDateString()} : ${currentAnnoncementDate.toLocaleTimeString()}`}
+              {`${currentAnnouncementDate.toDateString()} : ${currentAnnouncementDate.toLocaleTimeString()}`}
             </span>
           </Card>
 

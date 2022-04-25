@@ -3,7 +3,7 @@ import { addAnnouncement, updateAnnouncement, deleteAnnouncement } from '../redu
 import { useState } from 'react';
 import AnnouncementList from '../components/Announcements/AnnouncementsList';
 import AnnouncementsEmpty from '../components/Announcements/AnnouncementsEmpty';
-import AddAnnoncement from '../components/Announcements/AddAnnouncement';
+import AddAnnouncement from '../components/Announcements/AddAnnouncement';
 import Modal from '../components/UI/Modal';
 
 const Announcements = () => {
@@ -18,19 +18,19 @@ const Announcements = () => {
     setEditAnnouncement(null);
   };
 
-  const addAnnouncmentHandler = ({ title, description }) => {
+  const addAnnouncementHandler = ({ title, description }) => {
     dispatch(addAnnouncement({ title, description }));
 
     hideAndClearForm();
   };
 
-  const updateAnnouncmentHandler = ({ title, description, id }) => {
+  const updateAnnouncementHandler = ({ title, description, id }) => {
     dispatch(updateAnnouncement({ title, description, id }));
 
     hideAndClearForm();
   };
 
-  const deleteAnnouncmentHandler = (id) => {
+  const deleteAnnouncementHandler = (id) => {
     dispatch(deleteAnnouncement({ id }));
 
     hideAndClearForm();
@@ -41,7 +41,7 @@ const Announcements = () => {
     setIsFormVisible(true);
   };
 
-  const closeModalHandler = (announcement) => {
+  const closeModalHandler = () => {
     setEditAnnouncement(null);
     setIsFormVisible(false);
   };
@@ -50,10 +50,10 @@ const Announcements = () => {
     <div>
       {isFormVisible && (
         <Modal onCancel={closeModalHandler}>
-          <AddAnnoncement
+          <AddAnnouncement
             announcementToEdit={editAnnouncement}
-            onAddAnnouncment={addAnnouncmentHandler}
-            onUpdateAnnouncment={updateAnnouncmentHandler}
+            onAddAnnouncement={addAnnouncementHandler}
+            onUpdateAnnouncment={updateAnnouncementHandler}
             onCancel={closeModalHandler}
           />
         </Modal>
@@ -63,7 +63,7 @@ const Announcements = () => {
         <AnnouncementList
           announcements={announcementsList}
           onEditAnnouncement={setToEditHandler}
-          onDeleteAnnouncement={deleteAnnouncmentHandler}
+          onDeleteAnnouncement={deleteAnnouncementHandler}
         />
       ) : (
         <AnnouncementsEmpty onStartAdd={() => setIsFormVisible(true)} />

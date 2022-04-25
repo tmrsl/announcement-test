@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 
 // Pages
 import Home from './pages/Home';
@@ -10,7 +10,9 @@ function App() {
     <div className="min-h-screen flex flex-col bg-slate-100">
       <header className="flex items-center justify-between bg-white shadow-sm">
         <div className="container mx-auto flex items-center justify-between py-3 px-6">
-          <span>Announcment.io</span>
+          <Link to="/announcements">
+            <span>Announcment.io</span>
+          </Link>
 
           {/* <Button onClick={() => setIsFormVisible(true)}>Add new annoncement</Button> */}
         </div>
