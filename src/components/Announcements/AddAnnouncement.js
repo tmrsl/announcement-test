@@ -1,4 +1,3 @@
-import Card from '../UI/Card';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 import { useEffect, useState } from 'react';
@@ -42,25 +41,23 @@ const AddAnnoncement = (props) => {
   };
 
   return (
-    <Card className="mx-auto my-0 mb-8 w-4/5 max-w-2xl p-4">
-      <form onSubmit={addAnnouncementHandler}>
-        <Input label="Title" id="aTitle" type="text" value={enteredTitle} onChange={enteredTitleHandler} />
-        <Input
-          label="Description"
-          id="aDescription"
-          type="text"
-          value={enteredDescription}
-          onChange={enteredDescriptionHandler}
-        />
+    <form onSubmit={addAnnouncementHandler}>
+      <Input label="Title" id="aTitle" type="text" value={enteredTitle} onChange={enteredTitleHandler} />
+      <Input
+        label="Description"
+        id="aDescription"
+        type="text"
+        value={enteredDescription}
+        onChange={enteredDescriptionHandler}
+      />
 
-        <div className="mt-4 flex gap-4">
-          <Button type="submit">{isAnnouncementEdit ? 'Edit Announcement' : 'Add Announcement'}</Button>
-          <Button type="button" onClick={props.onCancel}>
-            Cancel
-          </Button>
-        </div>
-      </form>
-    </Card>
+      <div className="mt-4 flex gap-4">
+        <Button type="submit">{isAnnouncementEdit ? 'Edit Announcement' : 'Add Announcement'}</Button>
+        <Button type="button" onClick={props.onCancel}>
+          Cancel
+        </Button>
+      </div>
+    </form>
   );
 };
 

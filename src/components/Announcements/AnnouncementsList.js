@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import Card from '../UI/Card';
 import Input from '../UI/Input';
 import AnnouncementItem from './AnnouncementItem';
@@ -20,12 +21,13 @@ function AnnouncementList(props) {
 
       <ul className="flex flex-col gap-1 list-none">
         {itemsToDisplay.map((announcement) => (
-          <AnnouncementItem
-            key={announcement.id}
-            announcement={announcement}
-            onEditAnnouncement={() => props.onEditAnnouncement(announcement)}
-            onDeleteItem={() => props.onDeleteAnnouncement(announcement.id)}
-          />
+          <Link key={announcement.id} to={`/announcements/${announcement.id}`}>
+            <AnnouncementItem
+              announcement={announcement}
+              onEditAnnouncement={() => props.onEditAnnouncement(announcement)}
+              onDeleteItem={() => props.onDeleteAnnouncement(announcement.id)}
+            />
+          </Link>
         ))}
       </ul>
     </Card>
