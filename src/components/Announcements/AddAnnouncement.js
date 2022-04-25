@@ -1,6 +1,6 @@
 import Input from '../UI/Input';
 import Button from '../UI/Button';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
 const AddAnnoncement = (props) => {
   const [enteredTitle, setEnteredTitle] = useState('');
@@ -41,6 +41,10 @@ const AddAnnoncement = (props) => {
     setEntereddescription(event.target.value);
   };
 
+  const canSubmit = useMemo(() => {
+    return enteredTitle.trim() && enteredDescription.trim();
+  }, [enteredTitle, enteredDescription]);
+
   return (
     <form onSubmit={addAnnouncementHandler}>
       <Input label="Title" id="aTitle" type="text" value={enteredTitle} onChange={enteredTitleHandler} />
@@ -53,7 +57,9 @@ const AddAnnoncement = (props) => {
       />
 
       <div className="mt-4 flex gap-4">
-        <Button type="submit">{isAnnouncementEdit ? 'Edit Announcement' : 'Add Announcement'}</Button>
+        <Button type="submit" disabled={!canSubmit}>
+          {isAnnouncementEdit ? 'Edit Announcement' : 'Add Announcement'}
+        </Button>
         <Button type="button" onClick={props.onCancel}>
           Cancel
         </Button>
