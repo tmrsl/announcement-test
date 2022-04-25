@@ -11,6 +11,29 @@ function hasSimilarWord(currentStr, targetStr) {
   return currectWords.some((w) => targetWords.includes(w));
 }
 
+function buildTopSimilar(announcements, currentAnnoncement, length = 3) {
+  const arr = [];
+
+  if (!announcements.length) {
+    return [];
+  }
+
+  for (const announcement of announcements) {
+    if (arr.length >= length) break;
+
+    if (announcement.id === currentAnnoncement.id) continue;
+
+    if (
+      hasSimilarWord(currentAnnoncement.title, announcement.title) ||
+      hasSimilarWord(currentAnnoncement.description, announcement.description)
+    ) {
+      arr.push(announcement);
+    }
+  }
+
+  return arr;
+}
+
 export default function AnnouncementDetails(props) {
   const params = useParams();
   const announcementsList = useSelector((state) => state.announcements);
@@ -18,16 +41,7 @@ export default function AnnouncementDetails(props) {
   const currentAnnoncement = announcementsList.find((a) => a.id === params.id);
   const currentAnnoncementDate = currentAnnoncement ? new Date(currentAnnoncement.date) : null;
 
-  const relativeAnnouncements = currentAnnoncement
-    ? announcementsList.filter((a) => {
-        if (a.id === currentAnnoncement.id) return false;
-
-        return (
-          hasSimilarWord(currentAnnoncement.title, a.title) ||
-          hasSimilarWord(currentAnnoncement.description, a.description)
-        );
-      })
-    : [];
+  const relativeAnnouncements = currentAnnoncement ? buildTopSimilar(announcementsList, currentAnnoncement) : [];
 
   return (
     <div>

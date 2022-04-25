@@ -70,7 +70,7 @@ const Announcements = () => {
       )}
 
       <button
-        className="absolute right-6 bottom-6 text-white text-xlw p-6 rounded-full bg-purple-700"
+        className="fixed right-6 bottom-6 text-white text-xlw p-6 rounded-full bg-purple-700"
         onClick={() => setIsFormVisible(true)}
       >
         <svg
