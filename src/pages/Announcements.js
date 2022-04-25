@@ -47,7 +47,7 @@ const Announcements = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-grow">
       {isFormVisible && (
         <Modal onCancel={closeModalHandler}>
           <AddAnnouncement

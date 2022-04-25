@@ -7,9 +7,18 @@ const Backdrop = (props) => {
 };
 
 const Modal = (props) => {
+  const backdropClickHandler = () => {
+    // eslint-disable-next-line no-restricted-globals
+    const confirmed = confirm('Are you sure to close?');
+
+    if (confirmed) {
+      props.onCancel();
+    }
+  };
+
   return (
     <Fragment>
-      {ReactDOM.createPortal(<Backdrop onCancel={props.onCancel} />, document.getElementById('backdrop-root'))}
+      {ReactDOM.createPortal(<Backdrop onCancel={backdropClickHandler} />, document.getElementById('backdrop-root'))}
       {ReactDOM.createPortal(
         <Card
           className={`fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] p-8 z-20 overflow-hidden ${props.className}`}

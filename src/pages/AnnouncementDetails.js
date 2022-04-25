@@ -44,9 +44,9 @@ export default function AnnouncementDetails(props) {
   const relativeAnnouncements = currentAnnouncement ? buildTopSimilar(announcementsList, currentAnnouncement) : [];
 
   return (
-    <div>
+    <div className="flex flex-grow">
       {currentAnnouncement ? (
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col flex-grow gap-8">
           <Card className="flex flex-col p-6">
             <h2 className="text-2xl mb-4">{currentAnnouncement.title}</h2>
             <h3 className="text-lg mb-6">{currentAnnouncement.description}</h3>
@@ -59,11 +59,15 @@ export default function AnnouncementDetails(props) {
             <h2 className="text-2xl mb-4">Relative announcements (top 3)</h2>
 
             <ul className="flex flex-col gap-1 list-none">
-              {relativeAnnouncements.map((announcement) => (
-                <Link key={announcement.id} to={`/announcements/${announcement.id}`}>
-                  <AnnouncementItem announcement={announcement} viewOnly />
-                </Link>
-              ))}
+              {relativeAnnouncements.length ? (
+                relativeAnnouncements.map((announcement) => (
+                  <Link key={announcement.id} to={`/announcements/${announcement.id}`}>
+                    <AnnouncementItem announcement={announcement} viewOnly />
+                  </Link>
+                ))
+              ) : (
+                <div>Seems like this announcement is quite unique and there are no similar ones</div>
+              )}
             </ul>
           </Card>
         </div>

@@ -15,7 +15,7 @@ const AnnouncementItem = ({ onEditAnnouncement, announcement, onDeleteItem, view
 
   return (
     <li
-      className="flex items-center gap-4 p-2 w-fullborder-solid border-2 border-gray-200 rounded-md hover:bg-zinc-300 ease-in duration-300"
+      className="flex items-center gap-4 p-2 w-fullborder-solid border-2 border-gray-200 rounded-md hover:bg-gray-100 duration-300"
       key={announcement.id}
     >
       <span className="mr-auto">{announcement.title}</span>
