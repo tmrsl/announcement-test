@@ -1,3 +1,7 @@
+# Live demo
+
+Test work preview on [Github pages](https://tmrsl.github.io/announcement-test/)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
